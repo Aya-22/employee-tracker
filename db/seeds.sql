@@ -1,6 +1,9 @@
-INSERT INTO department (id, dep_name)
-VALUES (001, "Engineering"),
-(002, "Finance"), (003, "Legal"), (004, "Sales");
+INSERT INTO department (dep_name)
+VALUES ("Engineering"),
+("Finance"), ("Legal"), ("Sales");
 
-INSERT INTO employee_role (id, title, salary, department_id)
-VALUES (1, "Sales Lead", 10000), (2, "Salesperson", 80000)
+INSERT INTO employee_role (title, salary, department_id)
+VALUES ("Sales Lead", 10000, 4), ("Salesperson", 80000, 4)
+
+INSERT INTO employee (first_name, last_name, role_id, manager_id)
+VALUES (John, Doe, 1, 1)
