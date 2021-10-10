@@ -42,6 +42,8 @@ const promptQuestion = () => {
   // }),
 };
 
+promptQuestion();
+
 function choiceElected (answers){
   switch (answers) {
     case "View all employees":
