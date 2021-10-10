@@ -9,7 +9,7 @@ DROP TABLE IF EXISTS department;
 
 CREATE TABLE department (
 id INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
-dep_name VARCHAR(30) NOT NULL,
+dep_name VARCHAR(30) NOT NULL
 );
 
 DROP TABLE IF EXISTS employee_role;
