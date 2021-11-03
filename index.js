@@ -18,106 +18,122 @@ const db = mysql.createConnection(
 );
 
 const promptQuestion = () => {
-  inquirer.prompt([
-    {
-      type: "list",
-      name: "question",
-      message: "What would you like to do?",
-      choices: [
-        "View all employees",
-        "Add employee",
-        "Update employee role",
-        "View all roles",
-        "Add role",
-        "View all departments",
-        "Add department",
-      ],
-    },
-  ])
+  inquirer
+    .prompt([
+      {
+        type: "list",
+        name: "question",
+        message: "What would you like to do?",
+        choices: [
+          "View all employees",
+          "Add employee",
+          "Update employee role",
+          "View all roles",
+          "Add role",
+          "View all departments",
+          "Add department",
+        ],
+      },
+    ])
 
-  .then (choiceElected)
-
-
+    .then(choiceElected);
 };
 
 promptQuestion();
 
-function choiceElected ({question}){
+function choiceElected({ question }) {
   switch (question) {
-    case "View all employees": return viewAllEmployees();
+    case "View all employees":
+      return viewAllEmployees();
     case "Add employee":
-    break;
+      break;
     case "Update employee role":
-    break;
-    case "View all roles": return viewAllRoles();
+      break;
+    case "View all roles":
+      return viewAllRoles();
     case "Add role":
-    break;
-    case "View all departments": return viewAllDepartments();
+      break;
+    case "View all departments":
+      return viewAllDepartments();
     case "Add department":
-    break;
-
+      break;
   }
+}
 
-};
+db.connect(function (err) {
+  if (err) throw err;
+  console.log("Connected!");
+});
 
-db.connect(function(err) {  
-  if (err) throw err;  
-  console.log("Connected!");  
-}); 
+function viewAllEmployees() {
+  const employee = "SELECT * FROM employee";
 
-
-function viewAllEmployees () {
- const employee = 'SELECT * FROM employee';
-  
-    db.query(employee, function (err, results) {
-      if (err) {
-        console.log(err)
-      } 
-    console.table(results);   
+  db.query(employee, function (err, results) {
+    if (err) {
+      console.log(err);
+    }
+    console.table(results);
     return promptQuestion();
   });
-  
+}
+
+function viewAllRoles() {
+  const roles = "SELECT * FROM employee_role";
+
+  db.query(roles, function (err, results) {
+    if (err) {
+      console.log(err);
+    }
+    console.table(results);
+    return promptQuestion();
+  });
+}
+
+function viewAllDepartments() {
+  const departments = "SELECT * FROM department";
+
+  db.query(departments, function (err, results) {
+    if (err) {
+      console.log(err);
+    }
+    console.table(results);
+    return promptQuestion();
+  });
+}
+
+const newEmployeeRole = () => {
+  inquirer.prompt([
+    {
+      type: "list",
+      name: "question",
+      message: "Which employee's role do you want to update?",
+      choices: ["John Doe", "Dave Wade", "Joe Roland", "Stranger Danger"],
+    },
+    {
+      type: "list",
+      name: "question",
+      message: "What is the employees role?",
+      choices: ["Sales Lead", "Salesperson", "Sales Manager"],
+    }
+
+
+  ])}
+
+
+function updateEmployeeRole() {
+  newEmployeeRole();
+  const updateRole =
+    "UPDATE employee_role SET title = ? WHERE first_name = ? AND last_name = ?";
+  db.query(updatedRole, function (err, results) {
+    if (err) {
+      console.log(err);
+    }
+    console.table(results);
+    return promptQuestion();
+  });
+
 };
 
-function viewAllRoles () {
-
-  const roles = 'SELECT * FROM employee_role';
-   
-     db.query(roles, function (err, results) {
-       if (err) {
-         console.log(err)
-       } 
-     console.table(results);   
-     return promptQuestion();
-   });
-   
- };
-
- function viewAllDepartments () {
-  const departments = 'SELECT * FROM department';
-   
-     db.query(departments, function (err, results) {
-       if (err) {
-         console.log(err)
-       } 
-     console.table(results);   
-     return promptQuestion();
-   });
-   
- };
-
- function updateEmployeeRole () {
-  const updateRole = 'UPDATE employee_role SET title = ? WHERE first_name = ? AND last_name = ?';
-     db.query(updatedRole, function (err, results) {
-       if (err) {
-         console.log(err)
-       } 
-     console.table(results);   
-     return promptQuestion();
-   });
-   
- };
-    
 //     db.query(sql, params, (err, result) => {
 //       if (err) {
 //         res.status(400).json({ error: err.message });
@@ -134,7 +150,7 @@ function viewAllRoles () {
 //   app.put('/Update employee role', (req, res) => {
 //     const sql = `UPDATE reviews SET review = ? WHERE id = ?`;
 //     const params = [req.body.review, req.params.id];
-  
+
 //     db.query(sql, params, (err, result) => {
 //       if (err) {
 //         res.status(400).json({ error: err.message });
