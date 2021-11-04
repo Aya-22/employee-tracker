@@ -101,36 +101,58 @@ function viewAllDepartments() {
   });
 }
 
-const newEmployeeRole = () => {
-  inquirer.prompt([
-    {
-      type: "list",
-      name: "question",
-      message: "Which employee's role do you want to update?",
-      choices: ["John Doe", "Dave Wade", "Joe Roland", "Stranger Danger"],
-    },
-    {
-      type: "list",
-      name: "question",
-      message: "What is the employees role?",
-      choices: ["Sales Lead", "Salesperson", "Sales Manager"],
-    }
+// const newEmployeeRole = () => {
+//   inquirer.prompt([
+//     {
+//       type: "list",
+//       name: "question",
+//       message: "Which employee's role do you want to update?",
+//       choices: ["John Doe", "Dave Wade", "Joe Roland", "Stranger Danger"],
+//     },
+//     {
+//       type: "list",
+//       name: "question",
+//       message: "What is the employees role?",
+//       choices: ["Sales Lead", "Salesperson", "Sales Manager"],
+//     }
 
 
-  ])}
+//   ])}
 
 
 function updateEmployeeRole() {
-  newEmployeeRole();
-  const updateRole =
-    "UPDATE employee_role SET title = ? WHERE first_name = ? AND last_name = ?";
+
+
+ const updateRole = "UPDATE employee_role SET title = ? WHERE first_name = ? AND last_name = ?";
+
   db.query(updatedRole, function (err, results) {
     if (err) {
       console.log(err);
     }
     console.table(results);
+    
     return promptQuestion();
   });
+  
+  inquirer.prompt([
+    {
+      type: "list",
+      name: "employeeName",
+      message: "Which employee's role do you want to update?",
+      choices: ["John Doe", "Dave Wade", "Joe Roland", "Stranger Danger"],
+    }
+  ])
+  .then((result) => {
+    console.log(result);
+  });
+inquirer.prompt([
+  {
+      type: "list",
+      name: "employeeRole",
+      message: "What is the employees role?",
+      choices: ["Sales Lead", "Salesperson", "Sales Manager"],
+    }
+ ])
 
 };
 
