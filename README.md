@@ -6,4 +6,4 @@ The first step taken was to create the database using sql. After creating the da
 
 
 To see a walkthrough of my code click on the link below:
-  https://youtu.be/6SYDg559fh8
+  https://youtu.be/Uu2ymginmPg
